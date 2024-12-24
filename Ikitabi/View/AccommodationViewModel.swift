@@ -32,4 +32,8 @@ final class AccommodationViewModel: ObservableObject, AccommodationViewModelProt
     func deleteAccommodation(_ uuid: UUID) {
         presenter?.deleteAccommodation(uuid)
     }
+
+    func showAccommodationSearch() {
+        presenter?.showAccommodationSearchScreen()
+    }
 }

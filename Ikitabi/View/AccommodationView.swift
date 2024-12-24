@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AccommodationView: View {
     @ObservedObject var viewModel: AccommodationViewModel
+
     var body: some View {
         VStack {
             List {
@@ -27,6 +28,11 @@ struct AccommodationView: View {
                 Button {
                     viewModel.addAccommodation()
                 } label: {Text("add accommodation")}
+            }
+        }
+        .toolbar {
+            Button("search") {
+                viewModel.showAccommodationSearch()
             }
         }
     }

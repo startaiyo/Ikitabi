@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-protocol AccommodationRouterProtocol {
+protocol AccommodationRouterProtocol: AnyObject {
     associatedtype ContentView = View
     static func createModule() -> ContentView
+    func navigation(to view: any Hashable)
 }
