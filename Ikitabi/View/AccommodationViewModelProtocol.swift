@@ -11,4 +11,5 @@ protocol AccommodationViewModelProtocol: AnyObject {
     func displayAccommodations(_ accommodations: [Accommodation])
     func fetchAccommodations()
     func deleteAccommodation(_ uuid: UUID)
+    func updateAccommodation()
 }

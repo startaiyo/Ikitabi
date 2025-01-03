@@ -29,4 +29,8 @@ final class AccommodationViewModel: ObservableObject, AccommodationViewModelProt
     func showAccommodationSearch() {
         presenter?.showAccommodationSearchScreen()
     }
+
+    func updateAccommodation() {
+        presenter?.updateAccommodation()
+    }
 }

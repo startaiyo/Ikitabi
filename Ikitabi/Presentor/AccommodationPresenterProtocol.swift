@@ -14,4 +14,5 @@ protocol AccommodationPresenterProtocol: AnyObject {
     func didAddAccommodation()
     func didDeleteAccommodation()
     func showAccommodationSearchScreen()
+    func updateAccommodation()
 }

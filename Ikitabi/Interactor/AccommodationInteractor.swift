@@ -28,4 +28,8 @@ final class AccommodationInteractor: AccommodationInteractorProtocol {
         }
         presenter?.didDeleteAccommodation()
     }
+
+    func updateAccommodation() {
+        accommodationStorage.updateAccommodation()
+    }
 }

@@ -39,4 +39,8 @@ final class AccommodationPresenter: AccommodationPresenterProtocol {
     func showAccommodationSearchScreen() {
         router?.navigation(to: AccommodationDestination.search)
     }
+
+    func updateAccommodation() {
+        interactor?.updateAccommodation()
+    }
 }

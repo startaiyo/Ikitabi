@@ -42,4 +42,8 @@ final class AccommodationStorageService: AccommodationStorageServiceProtocol {
         context?.delete(accommodation)
         try? context?.save()
     }
+
+    func updateAccommodation() {
+        try? context?.save()
+    }
 }

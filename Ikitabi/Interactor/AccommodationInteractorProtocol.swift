@@ -10,4 +10,5 @@ import Foundation
 protocol AccommodationInteractorProtocol: AnyObject {
     func fetchAccommodations()
     func deleteAccommodation(_ uuid: UUID)
+    func updateAccommodation()
 }
