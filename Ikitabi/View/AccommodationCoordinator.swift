@@ -9,6 +9,7 @@ import SwiftUI
 
 enum AccommodationDestination: Hashable {
     case search
+    case searchDetail(AccommodationSearchDetailViewModel)
 }
 
 struct AccommodationCoordinator: View {
@@ -23,6 +24,8 @@ struct AccommodationCoordinator: View {
                     switch destination {
                         case .search:
                             AccommodationSearchView(viewModel: searchViewModel)
+                        case .searchDetail(let searchDetailViewModel):
+                            AccommodationSearchDetailView(viewModel: searchDetailViewModel)
                     }
                 }
         }

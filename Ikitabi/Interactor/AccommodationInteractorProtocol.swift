@@ -9,6 +9,5 @@ import Foundation
 
 protocol AccommodationInteractorProtocol: AnyObject {
     func fetchAccommodations()
-    func addAccommodation(name: String, urlString: String, evaluation: Float)
     func deleteAccommodation(_ uuid: UUID)
 }

@@ -11,7 +11,7 @@ final class AccommodationSearchViewModel: ObservableObject, AccommodationSearchV
     @Published var accommodationSearchResults: [AccommodationSearchResult] = []
     var searchText: String = ""
 
-    var presenter: AccommodationSearchPresenter?
+    var presenter: AccommodationSearchPresenterProtocol?
 
     init() {
         presenter?.fetchAccommodationSearchResults(nil)
@@ -24,7 +24,10 @@ final class AccommodationSearchViewModel: ObservableObject, AccommodationSearchV
     }
 
     func search() {
-        print("search by", searchText)
-        presenter?.fetchAccommodationSearchResults(searchText.isEmpty ? searchText : nil)
+        presenter?.fetchAccommodationSearchResults(searchText.isEmpty ? nil : searchText)
+    }
+
+    func showAccommodationSearchDetail(_ result: AccommodationSearchResult) {
+        presenter?.showAccommodationSearchDetail(result)
     }
 }

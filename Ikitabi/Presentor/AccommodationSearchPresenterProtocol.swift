@@ -9,5 +9,6 @@ import Foundation
 
 protocol AccommodationSearchPresenterProtocol: AnyObject {
     func fetchAccommodationSearchResults(_ text: String?)
-    
+    func didFetchAccommodationSearchResults(_ accommodationSearchResults: [AccommodationSearchResult])
+    func showAccommodationSearchDetail(_ result: AccommodationSearchResult)
 }

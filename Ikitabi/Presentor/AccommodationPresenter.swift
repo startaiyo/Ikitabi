@@ -20,10 +20,6 @@ final class AccommodationPresenter: AccommodationPresenterProtocol {
         interactor?.fetchAccommodations()
     }
 
-    func addAccommodation(name: String, urlString: String, evaluation: Float) {
-        interactor?.addAccommodation(name: name, urlString: urlString, evaluation: evaluation)
-    }
-
     func deleteAccommodation(_ uuid: UUID) {
         interactor?.deleteAccommodation(uuid)
     }

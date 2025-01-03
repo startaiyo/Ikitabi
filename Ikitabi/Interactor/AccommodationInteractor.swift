@@ -8,21 +8,24 @@
 import Foundation
 
 final class AccommodationInteractor: AccommodationInteractorProtocol {
+    private let accommodationStorage: AccommodationStorageServiceProtocol
     private var accommodations: [Accommodation] = []
     weak var presenter: AccommodationPresenterProtocol?
 
+    init(accommodationStorage: AccommodationStorageServiceProtocol) {
+        self.accommodationStorage = accommodationStorage
+    }
+
     func fetchAccommodations() {
+        accommodations = accommodationStorage.fetchAccommodations(hotelNo: nil)
         presenter?.didFetchAccommodations(accommodations)
     }
 
-    func addAccommodation(name: String, urlString: String, evaluation: Float) {
-        let accommodation = Accommodation(name: name, urlString: urlString, evaluation: evaluation)
-        accommodations.append(accommodation)
-        presenter?.didAddAccommodation()
-    }
-
     func deleteAccommodation(_ uuid: UUID) {
-        accommodations.removeAll { $0.id == uuid }
+        let accommodationToDelete = accommodations.first { $0.id == uuid }
+        if let accommodationToDelete {
+            accommodationStorage.deleteAccommodation(accommodationToDelete)
+        }
         presenter?.didDeleteAccommodation()
     }
 }

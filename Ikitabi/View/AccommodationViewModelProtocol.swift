@@ -9,6 +9,6 @@ import Foundation
 
 protocol AccommodationViewModelProtocol: AnyObject {
     func displayAccommodations(_ accommodations: [Accommodation])
-    func addAccommodation()
+    func fetchAccommodations()
     func deleteAccommodation(_ uuid: UUID)
 }

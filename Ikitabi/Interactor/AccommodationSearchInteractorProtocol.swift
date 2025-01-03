@@ -7,4 +7,7 @@
 
 protocol AccommodationSearchInteractorProtocol: AnyObject {
     func fetchAccommodationSearchResults(_ text: String?)
+    func getAccommodation(by hotelNo: Int) -> Accommodation?
+    func saveAccommodationSearchResult(_ result: AccommodationSearchResult,
+                                       withMemo: String?)
 }

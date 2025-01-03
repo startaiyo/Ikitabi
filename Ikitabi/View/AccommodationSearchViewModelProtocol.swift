@@ -10,5 +10,6 @@ import Foundation
 protocol AccommodationSearchViewModelProtocol: AnyObject {
     func displaySearchResults(_ results: [AccommodationSearchResult])
     func search()
+    func showAccommodationSearchDetail(_ result: AccommodationSearchResult)
 }
 

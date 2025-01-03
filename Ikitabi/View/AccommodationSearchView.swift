@@ -11,16 +11,25 @@ struct AccommodationSearchView: View {
     @ObservedObject var viewModel: AccommodationSearchViewModel
 
     var body: some View {
-        VStack {
-            List {
+        List {
+            if viewModel.accommodationSearchResults.isEmpty {
+                Text("データがありません。施設名等で検索してください。")
+                    .font(.headline)
+                    .foregroundColor(.gray)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            } else {
                 ForEach(viewModel.accommodationSearchResults) { result in
-                    Text(result.name)
+                    Button {
+                        viewModel.showAccommodationSearchDetail(result)
+                    } label: {
+                        Text(result.name)
+                    }
                 }
             }
-            .searchable(text: $viewModel.searchText)
-            .onSubmit(of: .search) {
-                viewModel.search()
-            }
+        }
+        .searchable(text: $viewModel.searchText)
+        .onSubmit(of: .search) {
+            viewModel.search()
         }
     }
 }
