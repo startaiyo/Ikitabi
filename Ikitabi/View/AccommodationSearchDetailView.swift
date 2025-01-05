@@ -16,7 +16,7 @@ struct AccommodationSearchDetailView: View {
             Spacer()
 
             VStack(spacing: 0) {
-                Text("Hotel Name")
+                Text("HOTEL_NAME")
                     .font(.headline)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
@@ -83,14 +83,14 @@ struct AccommodationSearchDetailView: View {
             .padding(.bottom, 20)
 
             VStack(spacing: 0) {
-                Text("Memo")
+                Text("MEMO")
                     .font(.headline)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .padding()
                     .background(Color.green)
                 
-                TextField("Enter your memo here", text: $viewModel.currentMemo)
+                TextField("ENTER_MEMO_DESCRIPTION", text: $viewModel.currentMemo)
                     .padding()
                     .background(Color.green.opacity(0.2))
                     .frame(maxWidth: .infinity)
@@ -103,7 +103,7 @@ struct AccommodationSearchDetailView: View {
                 viewModel.handleSaveButtonTapped()
                 dismiss()
             }) {
-                Text("Save")
+                Text("SAVE")
                     .font(.headline)
                     .padding()
                     .frame(maxWidth: .infinity)

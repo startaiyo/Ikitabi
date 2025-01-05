@@ -9,20 +9,16 @@ import SwiftUI
 
 struct AccommodationView: View {
     @ObservedObject var viewModel: AccommodationViewModel
-    @State private var editMode: EditMode = .inactive
-    @State private var showMemoAlert = false
-    @State private var selectedAccommodation: Accommodation?
-    @State private var newMemo: String = ""
     
     var body: some View {
         NavigationView {
             VStack {
                 if viewModel.accommodations.isEmpty {
                     VStack(spacing: 16) {
-                        Text("empty result")
+                        Text("EMPTY_ACCOMMODATION_TITLE")
                             .font(.title)
                             .foregroundColor(.gray)
-                        Text("please search the hotels with the search button")
+                        Text("EMPTY_ACCOMMODATION_DESCRIPTION")
                             .font(.body)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
@@ -35,19 +31,19 @@ struct AccommodationView: View {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(accommodation.name)
                                     .font(.headline)
-                                    .foregroundColor(.blue)
+                                    .foregroundColor(viewModel.editMode == .active ? .black : .blue)
 
                                 if let memo = accommodation.memo {
-                                    Text("メモ: \(memo)")
+                                    Text(String(format: NSLocalizedString("MEMO_LABEL", comment: "memo label"), memo))
                                         .font(.system(size: 15))
                                         .foregroundColor(.gray)
                                 }
                             }
                             .onTapGesture {
-                                if editMode == .active {
-                                    selectedAccommodation = accommodation
-                                    newMemo = accommodation.memo ?? ""
-                                    showMemoAlert = true
+                                if viewModel.editMode == .active {
+                                    viewModel.selectedAccommodation = accommodation
+                                    viewModel.newMemo = accommodation.memo ?? ""
+                                    viewModel.showMemoAlert = true
                                 } else {
                                     UIApplication.shared.open(URL(string: accommodation.urlString)!)
                                 }
@@ -60,35 +56,38 @@ struct AccommodationView: View {
                             }
                         }
                     }
-                    .environment(\.editMode, $editMode)
+                    .environment(\.editMode, $viewModel.editMode)
                 }
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    EditButton(editMode: $editMode)
+                if !viewModel.accommodations.isEmpty {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        EditButton(editMode: $viewModel.editMode)
+                    }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("search") {
+                    Button("SEARCH") {
                         viewModel.showAccommodationSearch()
                     }
                 }
             }
-            .navigationTitle("Want to visit")
+            .navigationTitle("WANT_TO_VISIT_TITLE")
             .onAppear {
                 viewModel.fetchAccommodations()
             }
-            .alert("Edit Memo", isPresented: $showMemoAlert) {
-                TextField("Memo", text: $newMemo)
+            .alert("EDIT_MEMO_TITLE", isPresented: $viewModel.showMemoAlert) {
+                TextField("MEMO", text: $viewModel.newMemo)
                     .textInputAutocapitalization(.never)
                 Button("OK") {
-                    selectedAccommodation?.memo = newMemo
+                    viewModel.selectedAccommodation?.memo = viewModel.newMemo
                     viewModel.updateAccommodation()
                 }
-                Button("Cancel", role: .cancel) { }
+                Button("CANCEL", role: .cancel) { }
             } message: {
-                Text("Please enter the anything")
+                Text("EDIT_MEMO_DESCRIPTION")
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
@@ -96,7 +95,7 @@ struct EditButton: View {
     @Binding var editMode: EditMode
     
     var body: some View {
-        Button(editMode.isEditing ? "Done" : "Edit") {
+        Button(editMode.isEditing ? "DONE" : "EDIT") {
             switch editMode {
                 case .active:
                     editMode = .inactive

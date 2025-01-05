@@ -8,6 +8,7 @@
 import Foundation
 import SwiftData
 
+// When the migration is needed, please refer this: https://ramble.impl.co.jp/7181/
 @Model
 final class Accommodation: Identifiable {
     var id: UUID

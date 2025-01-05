@@ -9,6 +9,7 @@ import SwiftUI
 
 final class AccommodationSearchViewModel: ObservableObject, AccommodationSearchViewModelProtocol {
     @Published var accommodationSearchResults: [AccommodationSearchResult] = []
+    @Published var isLoading = false
     var searchText: String = ""
 
     var presenter: AccommodationSearchPresenterProtocol?
@@ -18,13 +19,15 @@ final class AccommodationSearchViewModel: ObservableObject, AccommodationSearchV
     }
 
     func displaySearchResults(_ results: [AccommodationSearchResult]) {
-        DispatchQueue.main.async {
-            self.accommodationSearchResults = results
+        DispatchQueue.main.async { [weak self] in
+            self?.accommodationSearchResults = results
+            self?.isLoading = false
         }
     }
 
     func search() {
         presenter?.fetchAccommodationSearchResults(searchText.isEmpty ? nil : searchText)
+        isLoading = true
     }
 
     func showAccommodationSearchDetail(_ result: AccommodationSearchResult) {

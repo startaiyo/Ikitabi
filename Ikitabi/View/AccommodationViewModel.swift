@@ -9,6 +9,10 @@ import SwiftUI
 
 final class AccommodationViewModel: ObservableObject, AccommodationViewModelProtocol {
     @Published var accommodations: [Accommodation] = []
+    @Published var editMode: EditMode = .inactive
+    @Published var showMemoAlert = false
+    @Published var selectedAccommodation: Accommodation?
+    @Published var newMemo: String = ""
 
     var presenter: AccommodationPresenter?
 
